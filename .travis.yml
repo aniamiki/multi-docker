@@ -9,7 +9,7 @@ script:
  - docker run -e CI=true migab/react-test npm test
 
 after_success:
- - docker build -t migab/multi-client-2 ./client
+ - docker build -t migab/multi-client ./client
  - docker build -t migab/multi-nginx ./nginx
  - docker build -t migab/multi-serwer ./server
  - docker build -t migab/multi-worker ./worker
@@ -17,7 +17,8 @@ after_success:
  #Log in to the docker CLI
  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
  #Take those images and push them to the docker hub
- - docker push migab/multi-client-2
+ #- docker tag migab/multi-client migab/multi-client:latest
+ - docker push migab/multi-client
  - docker push migab/multi-nginx
  - docker push migab/multi-serwer
  - docker push migab/multi-worker
